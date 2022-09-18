@@ -1,30 +1,30 @@
 /*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-A view displaying information about a hike, including an elevation graph.
-*/
+ See LICENSE folder for this sample’s licensing information.
+ 
+ Abstract:
+ A view displaying information about a hike, including an elevation graph.
+ */
 
 import SwiftUI
 
 struct HikeView: View {
   var hike: Hike
   @State private var showDetail = true
-
+  
   var body: some View {
     VStack {
       HStack {
         HikeGraph(hike: hike, path: \.elevation)
           .frame(width: 50, height: 30)
-
+        
         VStack(alignment: .leading) {
           Text(hike.name)
             .font(.headline)
           Text(hike.distanceText)
         }
-
+        
         Spacer()
-
+        
         Button {
           withAnimation {
             showDetail.toggle()
@@ -38,23 +38,23 @@ struct HikeView: View {
             .padding()
         }
       }
-
-        if showDetail {
-            HikeDetail(hike: hike)
-            .transition(.moveAndFade)
-        }
+      
+      if showDetail {
+        HikeDetail(hike: hike)
+          .transition(.moveAndFade)
       }
+    }
   }
 }
 
 struct HikeView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            HikeView(hike: ModelData().hikes[0])
-              .padding()
-            Spacer()
-        }
+  static var previews: some View {
+    VStack {
+      HikeView(hike: ModelData().hikes[0])
+        .padding()
+      Spacer()
     }
+  }
 }
 
 extension AnyTransition {
